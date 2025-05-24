@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
-// Uncomment below if you want colors in console logs
-// import chalk from 'chalk';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
