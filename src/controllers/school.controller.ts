@@ -11,7 +11,6 @@ export default class SchoolController {
 
     try {
       schoolSchema.parse(req)
-      
       const { ...schooldata } = req.body;
       const id = await this.schoolService.addSchool(schooldata)
       res.status(201).json({
@@ -23,7 +22,6 @@ export default class SchoolController {
       return
     } catch (error) {
       if (error instanceof z.ZodError) {
-        console.log("error", error)
         next({
           statusCode: 400,
           message: error.errors.map(err => err.message).join(', ')
@@ -40,16 +38,12 @@ export default class SchoolController {
       await findNearBySchoolSchema.parse(req)
       const { latitude, longitude } = req.query
       const nearBySchools = await this.schoolService.findNearBySchool(Number(latitude), Number(longitude))
-      console.log("nearBySchools", nearBySchools)
       res.status(200).json({
         message: "Nearby Schools Retrive Successfuuly",
         data: nearBySchools
       })
-
       return
-
     } catch (error: any) {
-      console.log("error", error)
       next(error)
     }
 

@@ -13,6 +13,9 @@ export default class SchoolService {
   async addSchool(data: ISchoolData) {
     try {
       const { name, address, latitude, longitude } = data;
+      if (!name || !address || latitude == null || longitude == null) {
+        throw new ErrorHandler(400, 'Bad Request - All fields are required: name, address, latitude, and longitude.');
+      }
       const id = this.schoolRepository.addSchool(data);
       return id;
     } catch (err: any) {
@@ -26,8 +29,6 @@ export default class SchoolService {
 
   async findNearBySchool(latitude: number, longitude: number) {
     try {
-      const maxDist = 1000
-
       const nearbySchools = await this.schoolRepository.findSchools(latitude, longitude);
       return nearbySchools;
 
