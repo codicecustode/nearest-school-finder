@@ -38,9 +38,10 @@ Start in development mode:
 
 You should see:
 
-    ✅ Connected to MySQL database.
-    🚀 Server is running!
-    📍 Listening on: http://localhost:3000
+  ✅ Connected to the MySQL database
+  🚀 Running successfully
+  📍 Listening on: http://localhost:3000
+  🌐 Live on Render: https://nearest-school-finder.onrender.com
 
 ---
 
