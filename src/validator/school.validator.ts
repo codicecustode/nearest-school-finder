@@ -13,8 +13,19 @@ export type schoolType = z.infer<typeof schoolSchema>["body"]
 
 export const findNearBySchoolSchema = z.object({
   query: z.object({
-    latitude: z.string(),
-    longitude: z.string()
+
+    latitude: z.string().refine(val => {
+      const num = Number(val);
+      return !isNaN(num) && num >= -90 && num <= 90;
+    }, {
+      message: "Latitude must be a number between -90 and 90"
+    }),
+    longitude: z.string().refine(val => {
+      const num = Number(val);
+      return !isNaN(num) && num >= -180 && num <= 180;
+    }, {
+      message: "Longitude must be a number between -180 and 180"
+    })
   })
 })
 
